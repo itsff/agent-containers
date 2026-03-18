@@ -9,8 +9,8 @@ RUN npm install -g @openai/codex && \
 FROM agent-base
 
 # Copy the installed Codex from builder
-# We must use --chown to ensure the node user owns the copied files
-COPY --from=builder --chown=node:node /home/node/.npm-global /home/node/.npm-global
+# We must use --chown to ensure the ubuntu user owns the copied files
+COPY --from=builder --chown=ubuntu:ubuntu /home/ubuntu/.npm-global /home/ubuntu/.npm-global
 
 # Display version information
 RUN echo "" && \

@@ -1,4 +1,4 @@
-.PHONY: all clean deep-clean base claude-code openai-codex
+.PHONY: all clean deep-clean base claude-code openai-codex open-code
 
 # Determine container engine (podman or docker)
 CONTAINER_ENGINE := $(shell which podman 2>/dev/null || which docker 2>/dev/null)
@@ -8,7 +8,7 @@ HOST_UID := $(shell id -u)
 HOST_GID := $(shell id -g)
 
 # Tools to install in to the containers with apt-get
-LOCAL_TOOLS := "git curl jq ripgrep vim nano make zip unzip ssh-client wget tree imagemagick build-essential python3 python3-pip"
+LOCAL_TOOLS := "git curl jq ripgrep neovim nano make zip unzip openssh-client wget tree imagemagick ca-certificates gnupg procps mc tig build-essential python3 python3-pip wl-clipboard xclip xsel"
 
 
 # Ensure we have a container engine

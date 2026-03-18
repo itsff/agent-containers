@@ -1,8 +1,8 @@
 # Build stage
 FROM agent-base AS builder
 
-# We act as 'node' user (inherited from base)
-# Because we set NPM_CONFIG_PREFIX in base, this installs to /home/node/.npm-global
+# We act as 'ubuntu' user (inherited from base)
+# Because we set NPM_CONFIG_PREFIX in base, this installs to /home/ubuntu/.npm-global
 RUN npm install -g opencode-ai && \
   echo "Installed Open Code version: $(opencode --version)"
 
@@ -10,8 +10,8 @@ RUN npm install -g opencode-ai && \
 FROM agent-base
 
 # Copy the installed global modules from builder
-# We must use --chown to ensure the node user owns the copied files
-COPY --from=builder --chown=node:node /home/node/.npm-global /home/node/.npm-global
+# We must use --chown to ensure the ubuntu user owns the copied files
+COPY --from=builder --chown=ubuntu:ubuntu /home/ubuntu/.npm-global /home/ubuntu/.npm-global
 
 # Display version information
 RUN echo "" && \
@@ -21,5 +21,7 @@ RUN echo "" && \
   echo "\e[34m" && opencode --version && \
   echo "\e[0m" && \
   echo ""
+
+EXPOSE 3000-3010
 
 CMD ["opencode"]
