@@ -73,6 +73,12 @@ fi
 if [ -f "$HOME/.gitconfig" ]; then
   MOUNTS+=( -v "$HOME/.gitconfig:${CONTAINER_HOME}/.gitconfig:ro" )
 fi
+if [ -d "$HOME/.claude/skills" ]; then
+  MOUNTS+=( -v "$HOME/.claude/skills:${CONTAINER_HOME}/.claude/skills:rw" )
+fi
+if [ -d "$HOME/.agents/skills" ]; then
+  MOUNTS+=( -v "$HOME/.agents/skills:${CONTAINER_HOME}/.agents/skills:rw" )
+fi
 
 # Pass through Wayland/X11 so clipboard tools inside the container can talk to
 # the host display server.
