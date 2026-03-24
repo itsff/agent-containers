@@ -72,11 +72,7 @@ RUN mkdir -p /home/ubuntu/.npm-global && \
 RUN npm install -g agent-browser && \
   agent-browser install
 
-# 7. Install beads (bd) - Distributed graph issue tracker for AI agents
-# https://github.com/steveyegge/beads
-RUN npm install -g @beads/bd
-
-# 8. Bash Configuration
+# 7. Bash Configuration
 # Add the path export to bashrc so interactive shells pick it up
 RUN echo "export PATH=${NPM_CONFIG_PREFIX}/bin:${BUN_INSTALL}/bin:\$PATH" >> /home/ubuntu/.bashrc
 
@@ -87,7 +83,7 @@ RUN if ! grep -q '/etc/bash_aliases' /etc/bash.bashrc; then \
     echo 'if [ -f /etc/bash_aliases ]; then . /etc/bash_aliases; fi' >> /etc/bash.bashrc; \
   fi
 
-# 9. Copy aliases to the 'ubuntu' user's home
+# 8. Copy aliases to the 'ubuntu' user's home
 USER ubuntu
 COPY --chown=ubuntu:ubuntu ./.bash_aliases /home/ubuntu/.bash_aliases
 RUN echo "if [ -f ~/.bash_aliases ]; then . ~/.bash_aliases; fi" >> /home/ubuntu/.bashrc
