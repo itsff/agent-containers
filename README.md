@@ -37,7 +37,9 @@ Tool-specific images extend this base with their unique requirements:
 ```
 agent-base
 ├── claude-code
-└── openai-codex
+├── openai-codex
+├── open-code
+└── pi
 ```
 
 Each Dockerfile uses multi-stage builds to:
@@ -51,7 +53,7 @@ Each Dockerfile uses multi-stage builds to:
 The build system supports caching control options:
 
 ```bash
-# Build all containers (base, claude-code, openai-codex)
+# Build all containers (base, claude-code, openai-codex, open-code, pi)
 make all
 
 # Build just the base image
@@ -59,6 +61,9 @@ make base
 
 # Build a specific tool (automatically builds base if needed)
 make claude-code
+
+# Build the pi container
+make pi
 
 # Build without cache
 make claude-code DISABLE_CACHE=1
@@ -109,12 +114,16 @@ function claude() {
 function codex() {
   eval "$(__ai_container_launcher) --rm --tty --interactive -e OPENAI_API_KEY -v $(pwd):/app:rw openai-codex $@"
 }
+
+function pi() {
+  "$(pwd)/pi/run-pi.sh" "$@"
+}
 ```
 
 Put those some place in your `.zshrc` or `.bashrc` file and you'll be able to
-launch the agent in a working directory with a call to `claude` or `codex`. You
-can test they work by getting a bash shell in them with `claude bash` or
-`claude codex`.
+launch the agent in a working directory with a call to `claude`, `codex`, or
+`pi`. You can test they work by getting a bash shell in them with
+`claude bash`.
 
 ## See Also
 

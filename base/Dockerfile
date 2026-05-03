@@ -1,6 +1,6 @@
 FROM node:23-slim AS nodejs
 
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 ARG HOST_UID=1000
 ARG HOST_GID=1000
@@ -12,7 +12,7 @@ COPY --from=nodejs /usr/local/ /usr/local/
 # 1. Install system dependencies and language SDKs (as root)
 RUN apt-get update && \
   apt-get install -y --no-install-recommends ca-certificates curl gnupg wget && \
-  wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb && \
+  wget https://packages.microsoft.com/config/ubuntu/26.04/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb && \
   dpkg -i /tmp/packages-microsoft-prod.deb && \
   rm -f /tmp/packages-microsoft-prod.deb && \
   apt-get update && \

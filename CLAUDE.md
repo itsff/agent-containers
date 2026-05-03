@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `make all` - Build all containers
 - `make claude-code` - Build Claude Code container
 - `make openai-codex` - Build OpenAI Codex container
+- `make open-code` - Build Open Code container
+- `make pi` - Build Pi container
 - `make clean` - Remove Docker images and prune dangling images
 
 ## Run Commands
